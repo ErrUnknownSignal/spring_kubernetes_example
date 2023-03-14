@@ -1,0 +1,47 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: example-cluster
+  region: ap-northeast-2
+  version: "1.25"
+
+vpc:
+  id: "vpc-00000000000000000"
+  subnets:
+    private:
+      ap-northeast-2a:
+        id: "subnet-00000000000000000"
+      ap-northeast-2b:
+        id: "subnet-00000000000000000"
+      ap-northeast-2c:
+        id: "subnet-00000000000000000"
+
+privateCluster:
+  enabled: true
+
+managedNodeGroups:
+  - name: nodegroup
+    desiredCapacity: 3
+    instanceType: t3.small
+    ssh:
+      enableSsm: true
+    privateNetworking: true
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        awsLoadBalancerController: true
+        albIngress: true
+
+iam:
+  withOIDC: true
+
+addons:
+  - name: vpc-cni
+    attachPolicyARNs:
+      - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+  - name: coredns
+  - name: kube-proxy
+
+secretsEncryption:
+  keyARN: arn:aws:kms:ap-northeast-2:000000000000:key/123456789-1234-1234-1234-123456789
