@@ -1,0 +1,28 @@
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: "1"
+
+ingress:
+  enabled: true
+  className: "alb"
+  annotations:
+    io/certificate-arn: arn:aws:acm:ap-northeast-2:1111111111111:certificate/1234-5678-0000
+  hosts:
+    - host: k8s.qa.spring.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+resources:
+   limits:
+     cpu: 2048m
+     memory: 2048Mi
+   requests:
+     cpu: 2048m
+     memory: 2048Mi
+
+env: "production"
+
+javaOptions:
+  - -XX:+UseContainerSupport
