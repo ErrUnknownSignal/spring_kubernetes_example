@@ -13,7 +13,7 @@ node {
      }
 
      stage('docker build') {
-         app = docker.build("${ECR_HOST}/crm")
+         app = docker.build("${ECR_HOST}/spring-kubernetes-example")
      }
 
      stage('docker push') {
