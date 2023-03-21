@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "chart.selectorLabels" . | nindent 6 }}
+  workloadRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "chart.fullname" . }}
+  minReadySeconds: 30
+  revisionHistoryLimit: 2
+{{/*  paused: true*/}}
+  strategy:
+    canary:
+      canaryService: {{ include "chart.fullname" . }}-canary
+      stableService: {{ include "chart.fullname" . }}-stable
+      trafficRouting:
+        alb:
+          ingress: {{ include "chart.fullname" . }}
+          rootService: {{ include "chart.fullname" . }}
+          servicePort: {{ .Values.service.port }}
+      maxUnavailable: 0
+{{/*      dynamicStableScale: ture*/}}
+      steps:
+{{/*        - setCanaryScale:*/}}
+{{/*            replicas: 1*/}}
+{{/*        - pause: { }*/}}
+        - setWeight: 30
+        - setCanaryScale:
+            weight: 30
+        - pause: { duration: 3m }
+        - setWeight: 60
+        - setCanaryScale:
+            weight: 60
+        - pause: { duration: 3m }

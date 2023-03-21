@@ -34,3 +34,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+### etc ###
+secret*.yaml
+_*.yaml
