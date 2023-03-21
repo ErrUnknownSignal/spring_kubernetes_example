@@ -5,10 +5,9 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.23.3-alpine-slim"
+  repository: 0000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/spring-kubernetes-example
+  pullPolicy: Always
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -39,7 +38,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
-  targetPort: 80
+  targetPort: 8080
 
 ingress:
   enabled: true

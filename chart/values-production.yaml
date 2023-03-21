@@ -1,15 +1,15 @@
 image:
-  repository: nginx
-  pullPolicy: IfNotPresent
+  repository: 0000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/spring-kubernetes-example
+  pullPolicy: Always
   tag: "1"
 
 ingress:
   enabled: true
   className: "alb"
   annotations:
-    io/certificate-arn: arn:aws:acm:ap-northeast-2:1111111111111:certificate/1234-5678-0000
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:1111111111111:certificate/1234-5678-0000
   hosts:
-    - host: k8s.qa.spring.io
+    - host: k8s.spring.io
       paths:
         - path: /
           pathType: ImplementationSpecific

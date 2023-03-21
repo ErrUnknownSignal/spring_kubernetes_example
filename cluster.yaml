@@ -23,7 +23,7 @@ privateCluster:
 managedNodeGroups:
   - name: nodegroup
     desiredCapacity: 3
-    instanceType: t3.small
+    instanceType: t3.xlarge
     ssh:
       enableSsm: true
     privateNetworking: true
