@@ -73,6 +73,17 @@ spec:
       {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - {{ .Chart.Name }}
+                topologyKey: failure-domain.beta.kubernetes.io/zone
+              weight: 1
       {{- end }}
       {{- with .Values.tolerations }}
       tolerations:
