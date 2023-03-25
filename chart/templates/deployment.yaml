@@ -5,9 +5,7 @@ metadata:
   labels:
     {{- include "chart.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: 0
   selector:
     matchLabels:
       {{- include "chart.selectorLabels" . | nindent 6 }}
@@ -57,12 +55,12 @@ spec:
           livenessProbe:
             initialDelaySeconds: 30
             httpGet:
-              path: /
+              path: /health
               port: http
           readinessProbe:
             initialDelaySeconds: 30
             httpGet:
-              path: /
+              path: /health
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

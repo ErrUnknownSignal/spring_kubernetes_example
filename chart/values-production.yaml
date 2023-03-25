@@ -1,13 +1,13 @@
 image:
   repository: 0000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/spring-kubernetes-example
   pullPolicy: Always
-  tag: "1"
+  tag: "latest"
 
 ingress:
   enabled: true
   className: "alb"
-  annotations:
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:1111111111111:certificate/1234-5678-0000
+#  annotations:
+#    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:1111111111111:certificate/1234-5678-0000
   hosts:
     - host: k8s.spring.io
       paths:
@@ -16,11 +16,11 @@ ingress:
 
 resources:
    limits:
-     cpu: 2048m
-     memory: 2048Mi
+     cpu: 1024m
+     memory: 1024Mi
    requests:
-     cpu: 2048m
-     memory: 2048Mi
+     cpu: 1024m
+     memory: 1024Mi
 
 env: "production"
 
