@@ -16,9 +16,9 @@ vpc:
         id: "subnet-00000000000000000"
       ap-northeast-2c:
         id: "subnet-00000000000000000"
-
-privateCluster:
-  enabled: true
+  clusterEndpoints:
+    publicAccess:  true
+    privateAccess: true
 
 managedNodeGroups:
   - name: nodegroup
