@@ -62,4 +62,14 @@ spec:
                   number: {{ $svcPort }}
           {{- end }}
     {{- end }}
+    {{- if not .Values.ingress.hosts }}
+    - http:
+        paths:
+          - path: /*
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+    {{- end }}
 {{- end }}
