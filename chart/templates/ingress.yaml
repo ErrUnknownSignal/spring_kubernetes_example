@@ -65,7 +65,8 @@ spec:
     {{- if not .Values.ingress.hosts }}
     - http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: {{ $fullName }}
