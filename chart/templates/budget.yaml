@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+      {{- include "chart.labels" . | nindent 4 }}
+spec:
+{{/*  minAvailable: 2*/}}
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      {{- include "chart.selectorLabels" . | nindent 6 }}

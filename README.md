@@ -1,10 +1,17 @@
 # spring boot kubernetes example
 
 
+# requirements
+- awscli2 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+- kubectl https://kubernetes.io/docs/tasks/tools/
+- eksctl  https://eksctl.io/
+
+
 # install cluster
 ```bash
 eksctl create cluster -f cluster.yaml
 ```
+
 
 # install aws loadbalancer controller
 ```bash
@@ -27,6 +34,7 @@ helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller \
 
 kubectl label namespace <YOUR-NAMESPACE> elbv2.k8s.aws/pod-readiness-gate-inject=enabled
 ```
+
 
 # install argocd
 ```bash
