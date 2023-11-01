@@ -1,2 +1,6 @@
-*
-!build/libs
+.git
+.gradle
+.idea/
+build/
+Jenkinsfile
+README.md

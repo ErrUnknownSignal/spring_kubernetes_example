@@ -7,11 +7,6 @@ node {
         checkout scm
      }
 
-     stage('gradle build') {
-        sh 'chmod +x ./gradlew'
-        sh './gradlew build -x test'
-     }
-
      stage('docker build') {
          app = docker.build("${ECR_HOST}/spring-kubernetes-example")
      }
