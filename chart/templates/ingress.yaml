@@ -45,7 +45,7 @@ spec:
               service:
                 name: {{ $fullName }}
                 port:
-                  number: {{ $svcPort }}
+                  name: use-annotation
           {{- end }}
 
     {{ $baseHost := ( printf "canary-%v" .host ) }}
@@ -59,7 +59,7 @@ spec:
               service:
                 name: {{ $fullName }}-canary
                 port:
-                  number: {{ $svcPort }}
+                  name: use-annotation
           {{- end }}
     {{- end }}
     {{- if not .Values.ingress.hosts }}
@@ -71,6 +71,6 @@ spec:
               service:
                 name: {{ $fullName }}
                 port:
-                  number: {{ $svcPort }}
+                  name: use-annotation
     {{- end }}
 {{- end }}
